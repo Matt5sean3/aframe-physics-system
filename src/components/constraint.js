@@ -41,7 +41,7 @@ module.exports = {
   remove: function () {
     if (!this.constraint) return;
 
-    this.system.world.removeConstraint(this.constraint);
+    this.system.removeConstraint(this.constraint);
     this.constraint = null;
   },
 
@@ -75,6 +75,6 @@ module.exports = {
         throw new Error('[constraint] Unimplemented type.');
     }
 
-    this.system.world.addConstraint(this.constraint);
+    this.system.addConstraint(this.constraint);
   }
 };
