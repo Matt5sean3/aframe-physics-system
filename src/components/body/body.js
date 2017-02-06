@@ -209,6 +209,7 @@ module.exports = {
         body.position.copy(v);
       }
 
+      if (this.body.updateProperties) this.body.updateProperties();
       if (this.wireframe) this.syncWireframe();
     };
   }()),
