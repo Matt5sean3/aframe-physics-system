@@ -39,8 +39,19 @@ var Body = {
         data = this.data;
 
     var obj = this.el.object3D;
-    var pos = obj.position;
-    var quat = obj.quaternion;
+    var pos, quat;
+
+    if (parentEl.isScene) {
+      // Use the position directly
+      pos = obj.position;
+      quat = obj.quaternion;
+    } else {
+      // Get the position from THREE.js to account for nesting transforms
+      quat = new THREE.Quaternion();
+      pos = new THREE.Vector3();
+      obj.getWorldQuaternion(quat);
+      obj.getWorldPosition(pos);
+    }
 
     this.body = new CANNON.Body({
       mass: data.type === 'static' ? 0 : data.mass || 0,
